@@ -1,11 +1,10 @@
 class SongsController < ApplicationController
   def index
     if params[:artist_id] && Artist.find_by_id(params[:artist_id])
-      #binding.pry
       @songs = Artist.find_by_id(params[:artist_id]).songs
     elsif params[:artist_id]
       redirect_to artists_path
-      flash.alert = "Artist not found."
+      flash[:alert] = "Artist not found."
     else
       @songs = Song.all
     end
@@ -17,10 +16,9 @@ class SongsController < ApplicationController
       @artist = Artist.find_by_id(params[:artist_id])
       if !@artist.songs.include?(@song)
         redirect_to artist_songs_path(@artist)
-        flash.alert = "song not found"
+        flash[:alert] = "Song not found."
       end
     end
-    @artist = Artist.find_by_id(@song.artist_id)
   end
 
   def new
@@ -38,11 +36,11 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @song = Song.find(params[:id])
+    @song = Song.find_by_id(params[:id])
   end
 
   def update
-    @song = Song.find(params[:id])
+    @song = Song.find_by_id(params[:id])
 
     @song.update(song_params)
 
@@ -54,7 +52,7 @@ class SongsController < ApplicationController
   end
 
   def destroy
-    @song = Song.find(params[:id])
+    @song = Song.find_by_id(params[:id])
     @song.destroy
     flash[:notice] = "Song deleted."
     redirect_to songs_path
@@ -66,4 +64,3 @@ class SongsController < ApplicationController
     params.require(:song).permit(:title, :artist_name)
   end
 end
-
