@@ -20,7 +20,7 @@ class SongsController < ApplicationController
         flash.alert = "song not found"
       end
     end
-    #@artist = Artist.find_by_id(@song.artist_id)
+    @artist = Artist.find_by_id(@song.artist_id)
   end
 
   def new
