@@ -13,7 +13,6 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find_by_id(params[:id])
-    @artist = Artist.find_by_id(@song.artist_id)
     if params[:artist_id]
       @artist = Artist.find_by_id(params[:artist_id])
       if !@artist.songs.include?(@song)
@@ -21,6 +20,7 @@ class SongsController < ApplicationController
         flash.alert = "song not found"
       end
     end
+    @artist = Artist.find_by_id(@song.artist_id)
   end
 
   def new
