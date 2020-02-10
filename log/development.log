@@ -1037,3 +1037,5 @@ Processing by ArtistsController#show as HTML
 Completed 200 OK in 19ms (Views: 10.9ms | ActiveRecord: 1.6ms)
 
 
+Started GET "/artists/1" for 47.204.1.234 at 2020-02-10 03:16:06 +0000
+Cannot render console from 47.204.1.234! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
